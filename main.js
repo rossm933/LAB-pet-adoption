@@ -240,4 +240,27 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
-console.log("I am here!");
+
+  const targetingApp = document.querySelector("#app");
+
+  let domString = "";
+  for (const pet of pets) {
+    
+    domString += `<div class="card" style="width: 18rem;">
+      <img src=${pet.imageUrl} class="card-img-top" alt=${pet.name}>
+      <div class="card-body">
+         <h5 class="card-title">${pet.name}</h5>
+         <p class="card-text">Color: ${pet.color}</p>
+         <p class="card-text">Special Skill: ${pet.specialSkill}</p>
+         <p class="card-text">Type: ${pet.type}</p>
+  </div>
+</div>`;
+  };
+  targetingApp.innerHTML = domString;
+   
+  
+const button = document.querySelector('button');
+button.addEventListener('click', categorize);
+function categorize() {
+  
+}
