@@ -241,10 +241,14 @@ const pets = [
     }
   ];
 
-  const targetingApp = document.querySelector("#app");
+  const renderToDom = (divId, htmlToRender) => {
+    const selectedDiv = document.querySelector(divId);
+    selectedDiv.innerHTML = htmlToRender;
+  };
 
+  const cardsOnDom = (array) => {
   let domString = "";
-  for (const pet of pets) {
+  for (const pet of array) {
     
     domString += `<div class="card" style="width: 18rem;">
       <img src=${pet.imageUrl} class="card-img-top" alt=${pet.name}>
@@ -255,12 +259,44 @@ const pets = [
          <p class="card-text">Type: ${pet.type}</p>
   </div>
 </div>`;
-  };
-  targetingApp.innerHTML = domString;
-   
+  }
+  renderToDom("#app", domString)
+};
+
+  const filter = (array, typeString) => {
+    const typeArray = [];
   
-const button = document.querySelector('button');
-button.addEventListener('click', categorize);
-function categorize() {
-  
+    for (const pet of array) {
+      if (pet.type === typeString) {
+        typeArray.push(pet);
+      }
+
 }
+      return typeArray
+  };
+ 
+  const showDogButton = document.querySelector("#dog-btn");
+  const showCatButton = document.querySelector("#cat-btn");
+  const showDinoButton = document.querySelector("#dino-btn");
+  const showAllButton = document.querySelector("#all-btn");
+
+  showDogButton.addEventListener("click", () => {
+    const dogPets = filter(pets, "dog");
+    cardsOnDom(dogPets);
+  });
+
+  showCatButton.addEventListener("click", () => {
+    const catPets = filter(pets, "cat");
+    cardsOnDom(catPets);
+  });
+  
+  showDinoButton.addEventListener("click", () => {
+    const dinoPets = filter(pets, "dino");
+    cardsOnDom(dinoPets);
+  });
+
+  showAllButton.addEventListener("click", () => {
+    cardsOnDom(pets);
+  });
+  
+  
