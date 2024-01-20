@@ -300,3 +300,21 @@ const pets = [
   });
   
   
+const form = document.querySelector("form");
+
+const createNewPet = (e) => {
+  e.preventDefault();
+
+  const newPetObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    type: document.querySelector("#selector").value,
+    description: document.querySelector("#description").value,
+    image: document.querySelector("#image").value,
+  };
+  pets.push(newPetObj);
+  form.reset();
+  cardsOnDom(pets);
+}
+
+form.addEventListener("submit", createNewPet);
