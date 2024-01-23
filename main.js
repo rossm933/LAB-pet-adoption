@@ -330,3 +330,9 @@ app.addEventListener("click", (e) => {
     cardsOnDom(pets)
   }
 });
+
+const startApp = () => {
+  cardsOnDom(pets);
+}
+
+startApp();
