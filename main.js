@@ -1,3 +1,5 @@
+let filterToggle = true;
+
 const pets = [
     {
       id: 1,
@@ -264,16 +266,17 @@ const pets = [
   renderToDom("#app", domString)
 };
 
-  const filter = (array, typeString) => {
+  const filter = (animalString) => {
+    filterToggle = false;
     const typeArray = [];
   
-    for (const pet of array) {
-      if (pet.type === typeString) {
+    for (const pet of pets) {
+      if (pet.type === animalString) {
         typeArray.push(pet);
       }
 
-}
-      return typeArray
+} 
+    cardsOnDom(typeArray);
   };
  
   const showDogButton = document.querySelector("#dog-btn");
@@ -282,21 +285,19 @@ const pets = [
   const showAllButton = document.querySelector("#all-btn");
 
   showDogButton.addEventListener("click", () => {
-    const dogPets = filter(pets, "dog");
-    cardsOnDom(dogPets);
+    filter("dog")
   });
 
   showCatButton.addEventListener("click", () => {
-    const catPets = filter(pets, "cat");
-    cardsOnDom(catPets);
+    filter("cat")
   });
   
   showDinoButton.addEventListener("click", () => {
-    const dinoPets = filter(pets, "dino");
-    cardsOnDom(dinoPets);
+    filter("dino")
   });
 
   showAllButton.addEventListener("click", () => {
+    filterToggle = true;
     cardsOnDom(pets);
   });
   
@@ -325,9 +326,16 @@ app.addEventListener("click", (e) => {
   if (e.target.id.includes("delete")) {
     const [, id] = e.target.id.split("--");
     const index = pets.findIndex((p) => p.id === Number(id));
+    const pet = pets.find((e) => e.id === Number(id));
     pets.splice(index, 1);
     console.log(pets);
     cardsOnDom(pets)
+
+    if (filterToggle) {
+      cardsOnDom(pets)
+    } else {
+      filter(pet.type)
+    }
   }
 });
 
