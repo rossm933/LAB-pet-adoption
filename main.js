@@ -243,11 +243,13 @@ const pets = [
     }
   ];
 
+  // creating a function so that we can render div id's to the html, which will show up on the DOM. 
   const renderToDom = (divId, htmlToRender) => {
     const selectedDiv = document.querySelector(divId);
     selectedDiv.innerHTML = htmlToRender;
   };
 
+// Made a for loop to pass all the information from the array to the cards to the DOM.
   const cardsOnDom = (array) => {
   let domString = "";
   for (const pet of array) {
@@ -266,6 +268,7 @@ const pets = [
   renderToDom("#app", domString)
 };
 
+//created a filter that creates a new array of the specific pet we want to filter.
   const filter = (animalString) => {
     filterToggle = false;
     const typeArray = [];
@@ -278,12 +281,13 @@ const pets = [
 } 
     cardsOnDom(typeArray);
   };
- 
+ // Made variables for each button and assigned them id's from the html"
   const showDogButton = document.querySelector("#dog-btn");
   const showCatButton = document.querySelector("#cat-btn");
   const showDinoButton = document.querySelector("#dino-btn");
   const showAllButton = document.querySelector("#all-btn");
 
+  // Each button has an event when clicked, to filter the specific pet to render to the DOM
   showDogButton.addEventListener("click", () => {
     filter("dog")
   });
@@ -300,10 +304,11 @@ const pets = [
     filterToggle = true;
     cardsOnDom(pets);
   });
-  
-  
+
+  // Selecting the form element from the html
 const form = document.querySelector("form");
 
+// This is a create new pet function and render cardsOnDom at the end so that the new pet is added to the array we already have
 const createNewPet = (e) => {
   e.preventDefault();
 
@@ -321,6 +326,9 @@ const createNewPet = (e) => {
 
 form.addEventListener("submit", createNewPet);
 
+
+
+//Created the delete function by selecting the app id in th html and making a delete button in the domString. 
 const app = document.querySelector("#app");
 app.addEventListener("click", (e) => {
   if (e.target.id.includes("delete")) {
@@ -339,6 +347,7 @@ app.addEventListener("click", (e) => {
   }
 });
 
+// This function puts the cards on the DOM as soon as the website loads. 
 const startApp = () => {
   cardsOnDom(pets);
 }
